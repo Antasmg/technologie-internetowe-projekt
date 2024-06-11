@@ -36,8 +36,16 @@ document.addEventListener("DOMContentLoaded", function () {
     // Dodawanie nowego rekordu
     document.getElementById('formularz').addEventListener('submit', function (event) {
         event.preventDefault()
-        let nazwa = document.getElementById('nazwa').value
-        let opis = document.getElementById('opis').value
+        vin = document.getElementById('vin').value
+        brand = document.getElementById('brand').value
+        model = document.getElementById('model').value
+        year = document.getElementById('year').value
+        mileage = document.getElementById('mileage').value
+        engine = document.getElementById('engine').value
+        fuel_type = document.getElementById('fuel_type').value
+        owner_count = document.getElementById('owner_count').value
+        damage_state = document.getElementById('damage_state').value
+        photo_path = document.getElementById('photo_path').value
 
         if (nazwa.trim() !== '' && opis.trim() !== '') {
             fetch('php/dodaj.php', {
