@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.search-bar select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 30%; /* Adjust as needed */
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    display: flex;
+    padding: 20px;
+    margin: 10px auto;
+    width: 95%;
+    transition: transform 0.3s ease;
+}
+
+.card img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.card img:hover {
+    transform: scale(1.2);
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-content h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.card-content p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.card-content .details {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-content .details p {
+    width: 50%;
+}
+
+h1,
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+#dane {
+    margin-top: 20px;
+}
+
+#dane div {
+    margin-top: 20px;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    animation: all .2s ease-in;
+}
+
+button:hover {
+    background-color: #0056b3;
+    position: relative;
+    top: 1px;
+}
