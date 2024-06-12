@@ -22,8 +22,16 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <p><i class="fas fa-exclamation-triangle"></i>\t${item.damage_state}</p>
                             </div>
                         </div>
-                        <button onclick="usun(${item.id})"><i class="fas fa-trash"></i></button> 
-                        <button onclick="edytuj(${item.id})"><i class="fas fa-edit"></i></button>`
+                        <div class="buttons">
+                            <h3>${item.price} PLN</h3>
+                            <button class="phone-button" data-hover-text="${item.phone_number}">
+                                <p><i class="fas fa-phone"></i></p>
+                            </button>
+                            <div class="admin-buttons">
+                                <button onclick="usun(${item.id})"><i class="fas fa-trash"></i></button>
+                                <button onclick="edytuj(${item.id})"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>`
                         daneElement.appendChild(div)
                     })
                 } else {
@@ -46,25 +54,43 @@ document.addEventListener("DOMContentLoaded", function () {
         owner_count = document.getElementById('owner_count').value
         damage_state = document.getElementById('damage_state').value
         photo_path = document.getElementById('photo_path').value
+        price = document.getElementById('price').value
+        phone_number = document.getElementById('phone_number').value
 
-        if (nazwa.trim() !== '' && opis.trim() !== '') {
+        if (vin.trim() !== '' && brand.trim() !== '' && model.trim() !== '' &&
+            year.trim() !== '' && mileage.trim() !== '' && engine.trim() !== '' &&
+            owner_count.trim() !== '' && photo_path.trim() !== '' && price.trim() !== '' && phone_number.trim() !== '') {
             fetch('php/dodaj.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: `nazwa=${nazwa}&opis=${opis}`,
+                body: `vin=${vin}&brand=${brand}&model=${model}&year=${year}
+                       &mileage=${mileage}&engine=${engine}&fuel_type=${fuel_type}
+                       &owner_count=${owner_count}&damage_state=${damage_state}
+                       &photo_path=${photo_path}&price=${price}&phone_number=${phone_number}`,
             })
                 .then(response => response.json())
                 .then(data => {
                     console.log(data.message)
                     wyswietlDane()
-                    document.getElementById('nazwa').value = ''
-                    document.getElementById('opis').value = ''
+                    document.getElementById('vin').value = ''
+                    document.getElementById('brand').value = ''
+                    document.getElementById('model').value = ''
+                    document.getElementById('year').value = ''
+                    document.getElementById('mileage').value = ''
+                    document.getElementById('engine').value = ''
+                    document.getElementById('fuel_type').value = ''
+                    document.getElementById('owner_count').value = ''
+                    document.getElementById('damage_state').value = ''
+                    document.getElementById('photo_path').value = ''
+                    document.getElementById('price').value = ''
+                    document.getElementById('phone_number').value = ''
+
                 })
                 .catch(error => console.error('Błąd:', error))
         } else {
-            alert('Nazwa i opis nie mogą być puste!')
+            alert('Żadne pole nie może być puste!')
         }
     })
 
@@ -86,17 +112,35 @@ function usun(id) {
 
 // Funkcja edytująca dane
 function edytuj(id) {
-    let nazwa = prompt("Wprowadź nową nazwę:")
-    let opis = prompt("Wprowadź nowy opis:")
+    let vin = prompt("Insert new vin:")
+    let brand = prompt("Insert new brand:")
+    let model = prompt("Insert new model:")
+    let year = prompt("Insert new year:")
+    let mileage = prompt("Insert new mileage:")
+    let engine = prompt("Insert new engine:")
+    let fuel_type = prompt("Insert new fuel_type:")
+    let owner_count = prompt("Insert new owner_count:")
+    let damage_state = prompt("Insert new damage_state:")
+    let photo_path = prompt("Insert new photo_path:")
+    let price = prompt("Insert new price:")
+    let phone_number = prompt("Insert new phone_number:")
 
-    if (nazwa !== null && opis !== null) {
+    if (vin !== null && brand !== null && model !== null && year !== null && 
+        mileage !== null && engine !== null && fuel_type !== null && 
+        owner_count !== null && damage_state !== null && photo_path !== null && 
+        price !== null && phone_number !== null) {
         fetch('php/edytuj.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: `id=${id}&nazwa=${nazwa}&opis=${opis}`,
+            body: `id=${id}&vin=${vin}&brand=${brand}&model=${model}&
+                   year=${year}&mileage=${mileage}&engine=${engine}&
+                   fuel_type=${fuel_type}&owner_count=${owner_count}&
+                   damage_state=${damage_state}&photo_path=${photo_path}&
+                   price=${price}&phone_number=${phone_number}`,
         })
+
             .then(response => response.json())
             .then(data => {
                 console.log(data.message)
