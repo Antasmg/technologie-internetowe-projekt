@@ -27,10 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <button class="phone-button" data-hover-text="${item.phone_number}">
                                 <p><i class="fas fa-phone"></i></p>
                             </button>
-                            <div class="admin-buttons">
-                                <button onclick="usun(${item.id})"><i class="fas fa-trash"></i></button>
-                                <button onclick="edytuj(${item.id})"><i class="fas fa-edit"></i></button>
-                            </div>
+                            <button onclick="usun(${item.id})"><i class="fas fa-trash"></i></button>
                         </div>`
                         daneElement.appendChild(div)
                     })
@@ -107,45 +104,4 @@ function usun(id) {
             location.reload() // Przeładuj stronę po usunięciu
         })
         .catch(error => console.error('Błąd:', error))
-}
-
-
-// Funkcja edytująca dane
-function edytuj(id) {
-    let vin = prompt("Insert new vin:")
-    let brand = prompt("Insert new brand:")
-    let model = prompt("Insert new model:")
-    let year = prompt("Insert new year:")
-    let mileage = prompt("Insert new mileage:")
-    let engine = prompt("Insert new engine:")
-    let fuel_type = prompt("Insert new fuel_type:")
-    let owner_count = prompt("Insert new owner_count:")
-    let damage_state = prompt("Insert new damage_state:")
-    let photo_path = prompt("Insert new photo_path:")
-    let price = prompt("Insert new price:")
-    let phone_number = prompt("Insert new phone_number:")
-
-    if (vin !== null && brand !== null && model !== null && year !== null && 
-        mileage !== null && engine !== null && fuel_type !== null && 
-        owner_count !== null && damage_state !== null && photo_path !== null && 
-        price !== null && phone_number !== null) {
-        fetch('php/edytuj.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `id=${id}&vin=${vin}&brand=${brand}&model=${model}&
-                   year=${year}&mileage=${mileage}&engine=${engine}&
-                   fuel_type=${fuel_type}&owner_count=${owner_count}&
-                   damage_state=${damage_state}&photo_path=${photo_path}&
-                   price=${price}&phone_number=${phone_number}`,
-        })
-
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message)
-                location.reload()
-            })
-            .catch(error => console.error('Błąd:', error))
-    }
 }

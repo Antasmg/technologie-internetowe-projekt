@@ -1,13 +1,13 @@
 <?php
-// Połączenie z bazą danych
-$polaczenie = new mysqli('localhost', 'root', '', 'car_database');
+// Connection to DB
+$connection = new mysqli('localhost', 'root', '', 'car_database');
 
-// Weryfikacja połączenia
-if ($polaczenie->connect_error) {
-    die("Błąd połączenia: " . $polaczenie->connect_error);
+// Connection verification
+if ($connection->connect_error) {
+    die("Connection error: " . $connection->connect_error);
 }
 
-// Weryfikacja czy przekazano wszystkie wymagane dane
+// Data veryfication
 if (isset($_POST['vin']) && isset($_POST['brand']) && isset($_POST['model']) && 
     isset($_POST['year']) && isset($_POST['mileage']) && isset($_POST['engine']) && 
     isset($_POST['fuel_type']) && isset($_POST['owner_count']) && isset($_POST['damage_state']) && 
@@ -25,15 +25,15 @@ if (isset($_POST['vin']) && isset($_POST['brand']) && isset($_POST['model']) &&
     $price = $_POST['price'];
     $phone_number = $_POST['phone_number'];
 
-    // Zapytanie SQL do dodania nowego rekordu
+    // SQL insert query
     $sql = "INSERT INTO cars (vin, brand, model, year, mileage, engine, fuel_type, owner_count, damage_state, photo_path, price, phone_number) VALUES ('$vin', '$brand', '$model', '$year', '$mileage', '$engine', '$fuel_type', '$owner_count', '$damage_state', '$photo_path', '$price', '$phone_number')";
 
-    // Wykonanie zapytania
-    if ($polaczenie->query($sql) === TRUE) {
+    // Query execution
+    if ($connection->query($sql) === TRUE) {
         $response = array('status' => 'success', 'message' => 'Nowy rekord został dodany.');
         echo json_encode($response);
     } else {
-        $response = array('status' => 'error', 'message' => 'Błąd podczas dodawania nowego rekordu: ' . $polaczenie->error);
+        $response = array('status' => 'error', 'message' => 'Błąd podczas dodawania nowego rekordu: ' . $connection->error);
         echo json_encode($response);
     }
 } else {
@@ -41,6 +41,6 @@ if (isset($_POST['vin']) && isset($_POST['brand']) && isset($_POST['model']) &&
     echo json_encode($response);
 }
 
-// Zamknięcie połączenia z bazą danych
-$polaczenie->close();
+// Closing the connection to the database
+$connection->close();
 ?>

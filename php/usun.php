@@ -1,32 +1,32 @@
 <?php
-// Połączenie z bazą danych
-$polaczenie = new mysqli('localhost', 'root', '', 'car_database');
+// Connection to the database
+$connection = new mysqli('localhost', 'root', '', 'car_database');
 
-// Weryfikacja połączenia
-if ($polaczenie->connect_error) {
-    die("Błąd połączenia: " . $polaczenie->connect_error);
+// Connection verification
+if ($connection->connect_error) {
+    die("Connection error: " . $connection->connect_error);
 }
 
-// Weryfikacja czy przekazano ID do usunięcia
+// Verification if an ID to delete was passed
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Zapytanie SQL do usunięcia rekordu
+    // SQL query to delete a record
     $sql = "DELETE FROM cars WHERE id=$id";
 
-    // Wykonanie zapytanie
-    if ($polaczenie->query($sql) === TRUE) {
-        $response = array('status' => 'success', 'message' => 'Rekord został usunięty.');
+    // Executing the query
+    if ($connection->query($sql) === TRUE) {
+        $response = array('status' => 'success', 'message' => 'Record has been deleted.');
         echo json_encode($response);
     } else {
-        $response = array('status' => 'error', 'message' => 'Błąd podczas usuwania rekordu: ' . $polaczenie->error);
+        $response = array('status' => 'error', 'message' => 'Error deleting record: ' . $connection->error);
         echo json_encode($response);
     }
 } else {
-    $response = array('status' => 'error', 'message' => 'Nieprawidłowe żądanie.');
+    $response = array('status' => 'error', 'message' => 'Invalid request.');
     echo json_encode($response);
 }
 
-// Zamykanie połączenia z bazą danych
-$polaczenie->close();
+// Closing the connection to the database
+$connection->close();
 ?>

@@ -1,19 +1,19 @@
 <?php
-// Połączenie z bazą danych
-$polaczenie = new mysqli('localhost', 'root', '', 'car_database');
+// Connection to DB
+$connection = new mysqli('localhost', 'root', '', 'car_database');
 
-// Weryfikacja połączenia
-if ($polaczenie->connect_error) {
-    die("Błąd połączenia: " . $polaczenie->connect_error);
+// Connection verification
+if ($connection->connect_error) {
+    die("Connection error: " . $connection->connect_error);
 }
 
-// Zapytanie SQL
+// SQL query
 $sql = "SELECT * FROM cars";
 
-// Wykonanie zapytania
-$result = $polaczenie->query($sql);
+// Query execution
+$result = $connection->query($sql);
 
-// Konwertacja wyniku zapytania na tablicę
+// Converting the query result to an array
 $rows = array();
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
@@ -21,9 +21,9 @@ if ($result->num_rows > 0) {
     }
 }
 
-// Zwrot dane_2 w formacie JSON
+// Returning data in JSON format
 echo json_encode($rows);
 
-// Zamykanie połączenia z bazą danych
-$polaczenie->close();
+// Closing the connection to the database
+$connection->close();
 ?>

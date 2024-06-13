@@ -11,40 +11,8 @@
 <body>
     <div class="container">
         <h1>Car Search</h1>
-        <div class="search-bar">
-            <select id="brandFilter">
-                <option value="">Select Brand</option>
-                <option value="Audi">Audi</option>
-                <option value="BMW">BMW</option>
-                <!-- Add more brands as needed -->
-            </select>
-            <select id="engineFilter">
-                <option value="">Select Engine</option>
-                <option value="Benzyna">Benzyna</option>
-                <option value="Diesel">Diesel</option>
-                <!-- Add more engine types as needed -->
-            </select>
-            <select id="mileageFilter">
-                <option value="">Select Mileage</option>
-                <option value="0-100000">0-100000 km</option>
-                <option value="100000-200000">100000-200000 km</option>
-                <option value="200000+">200000+ km</option>
-            </select>
-            <select id="priceFilter">
-                <option value="">Select Price</option>
-                <option value="0-10000">0-10000</option>
-                <option value="10000-20000">10000-20000</option>
-                <option value="20000+">20000+</option>
-            </select>
-            <select id="conditionFilter">
-                <option value="">Select Condition</option>
-                <option value="bardzo">bardzo dobry</option>
-                <option value="dobry">dobry</option>
-            </select>
-            <button type="submit">Szukaj</button>
-        </div>
         <div id="dane"></div>
-        <h2>Dodaj nowy rekord:</h2>
+        <h2>Add new car:</h2>
         <form id="formularz">
             <input type="text" id="vin" placeholder="Numer vin">
             <input type="text" id="brand" placeholder="Marka">
