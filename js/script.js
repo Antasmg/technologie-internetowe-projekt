@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Pobieranie danych z bazy
-    function wyswietlDane() {
-        fetch('php/odczyt.php')
+    // Fetching data from the database
+    function display_data() {
+        fetch('php/read.php')
             .then(response => response.json())
             .then(data => {
-                let daneElement = document.getElementById('dane')
-                daneElement.innerHTML = ""
+                let dataElement = document.getElementById('data')
+                dataElement.innerHTML = ""
                 if (data.length > 0) {
                     data.forEach(item => {
                         let div = document.createElement('div')
@@ -27,18 +27,18 @@ document.addEventListener("DOMContentLoaded", function () {
                             <button class="phone-button" data-hover-text="${item.phone_number}">
                                 <p><i class="fas fa-phone"></i></p>
                             </button>
-                            <button onclick="usun(${item.id})"><i class="fas fa-trash"></i></button>
+                            <button onclick="delete_data(${item.id})"><i class="fas fa-trash"></i></button>
                         </div>`
-                        daneElement.appendChild(div)
+                        dataElement.appendChild(div)
                     })
                 } else {
-                    daneElement.innerHTML = "Brak danych do wyświetlenia."
+                    dataElement.innerHTML = "No data to display."
                 }
             })
-            .catch(error => console.error('Błąd:', error))
+            .catch(error => console.error('Error:', error))
     }
 
-    // Dodawanie nowego rekordu
+    // Adding a new record
     document.getElementById('formularz').addEventListener('submit', function (event) {
         event.preventDefault()
         vin = document.getElementById('vin').value
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (vin.trim() !== '' && brand.trim() !== '' && model.trim() !== '' &&
             year.trim() !== '' && mileage.trim() !== '' && engine.trim() !== '' &&
             owner_count.trim() !== '' && photo_path.trim() !== '' && price.trim() !== '' && phone_number.trim() !== '') {
-            fetch('php/dodaj.php', {
+            fetch('php/add.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     console.log(data.message)
-                    wyswietlDane()
+                    display_data()
                     document.getElementById('vin').value = ''
                     document.getElementById('brand').value = ''
                     document.getElementById('model').value = ''
@@ -85,23 +85,23 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById('phone_number').value = ''
 
                 })
-                .catch(error => console.error('Błąd:', error))
+                .catch(error => console.error('Error:', error))
         } else {
-            alert('Żadne pole nie może być puste!')
+            alert('No field can be empty!')
         }
     })
 
-    wyswietlDane()
+    display_data()
 })
-// Funkcja usuwająca dane
-function usun(id) {
-    fetch(`php/usun.php?id=${id}`, {
+// Function to delete data
+function delete_data(id) {
+    fetch(`php/delete.php?id=${id}`, {
         method: 'DELETE',
     })
         .then(response => response.json())
         .then(data => {
             console.log(data.message)
-            location.reload() // Przeładuj stronę po usunięciu
+            location.reload() // Reload the page after deletion
         })
-        .catch(error => console.error('Błąd:', error))
+        .catch(error => console.error('Error:', error))
 }

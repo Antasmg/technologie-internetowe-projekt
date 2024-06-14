@@ -11,31 +11,31 @@
 <body>
     <div class="container">
         <h1>Car Search</h1>
-        <div id="dane"></div>
+        <div id="data"></div>
         <h2>Add new car:</h2>
         <form id="formularz">
-            <input type="text" id="vin" placeholder="Numer vin">
-            <input type="text" id="brand" placeholder="Marka">
+            <input type="text" id="vin" placeholder="Vin number">
+            <input type="text" id="brand" placeholder="Brand">
             <input type="text" id="model" placeholder="Model">
-            <input type="text" id="year" placeholder="Rocznik">
-            <input type="text" id="mileage" placeholder="Przebieg">
-            <input type="text" id="engine" placeholder="Silnik">
+            <input type="text" id="year" placeholder="Year">
+            <input type="text" id="mileage" placeholder="Mileage">
+            <input type="text" id="engine" placeholder="Engine">
             <select id="fuel_type">
-                <option value="">Typ silnika</option>
-                <option value="Benzyna">benzyna</option>
-                <option value="Diesel">diesel</option>
-                <option value="Electric">electric</option>
+                <option value="">Fuel type</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
             </select>
-            <input type="number" id="owner_count" placeholder="Liczba właścicieli">
+            <input type="number" id="owner_count" placeholder="Owner count">
             <select id="damage_state">
-                <option value="">Stan</option>
-                <option value="Bardzo dobry">bardzo dobry</option>
-                <option value="Dobry">dobry</option>
+                <option value="">Damage state</option>
+                <option value="Very good">Very good</option>
+                <option value="Good">Good</option>
             </select>
-            <input type="text" id="photo_path" placeholder="Link do zdjęcia">
-            <input type="text" id="price" placeholder="price">
-            <input type="text" id="phone_number" placeholder="Numer telefonu">
-            <button type="submit">Dodaj</button>
+            <input type="text" id="photo_path" placeholder="Link to photo">
+            <input type="text" id="price" placeholder="Price">
+            <input type="text" id="phone_number" placeholder="Phone number">
+            <button type="submit">Submit</button>
         </form>
     </div>
 
