@@ -1,13 +1,13 @@
 <?php
-// Connection to DB
+// Connection to the database
 $connection = new mysqli('localhost', 'root', '', 'car_database');
 
-// Connection verification
+// Verify the connection
 if ($connection->connect_error) {
     die("Connection error: " . $connection->connect_error);
 }
 
-// Data veryfication
+// Verify the data
 if (isset($_POST['vin']) && isset($_POST['brand']) && isset($_POST['model']) && 
     isset($_POST['year']) && isset($_POST['mileage']) && isset($_POST['engine']) && 
     isset($_POST['fuel_type']) && isset($_POST['owner_count']) && isset($_POST['damage_state']) && 
@@ -26,21 +26,22 @@ if (isset($_POST['vin']) && isset($_POST['brand']) && isset($_POST['model']) &&
     $phone_number = $_POST['phone_number'];
 
     // SQL insert query
-    $sql = "INSERT INTO cars (vin, brand, model, year, mileage, engine, fuel_type, owner_count, damage_state, photo_path, price, phone_number) VALUES ('$vin', '$brand', '$model', '$year', '$mileage', '$engine', '$fuel_type', '$owner_count', '$damage_state', '$photo_path', '$price', '$phone_number')";
+    $sql = "INSERT INTO cars (vin, brand, model, year, mileage, engine, fuel_type, owner_count, damage_state, photo_path, price, phone_number) 
+            VALUES ('$vin', '$brand', '$model', '$year', '$mileage', '$engine', '$fuel_type', '$owner_count', '$damage_state', '$photo_path', '$price', '$phone_number')";
 
-    // Query execution
+    // Execute the query
     if ($connection->query($sql) === TRUE) {
-        $response = array('status' => 'success', 'message' => 'Nowy rekord został dodany.');
+        $response = array('status' => 'success', 'message' => 'New record has been added.');
         echo json_encode($response);
     } else {
-        $response = array('status' => 'error', 'message' => 'Błąd podczas dodawania nowego rekordu: ' . $connection->error);
+        $response = array('status' => 'error', 'message' => 'Error adding new record: ' . $connection->error);
         echo json_encode($response);
     }
 } else {
-    $response = array('status' => 'error', 'message' => 'Nieprawidłowe żądanie.');
+    $response = array('status' => 'error', 'message' => 'Invalid request.');
     echo json_encode($response);
 }
 
-// Closing the connection to the database
+// Close the connection to the database
 $connection->close();
 ?>
