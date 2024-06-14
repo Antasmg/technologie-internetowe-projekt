@@ -1,15 +1,23 @@
+// The DOMContentLoaded event is fired when the initial HTML document has been completely loaded and parsed, 
+// without waiting for stylesheets, images, and subframes to finish loading.
 document.addEventListener("DOMContentLoaded", function () {
     // Fetching data from the database
     function display_data() {
+        // Fetch data from the server using the fetch API
         fetch('php/read.php')
-            .then(response => response.json())
+            .then(response => response.json()) // Parse the response as JSON
             .then(data => {
-                let dataElement = document.getElementById('data')
-                dataElement.innerHTML = ""
+                let dataElement = document.getElementById('data') // Get the element with ID 'data'
+                dataElement.innerHTML = "" // Clear any existing content in the 'data' element
+    
                 if (data.length > 0) {
+                    // Iterate over each item in the data array
                     data.forEach(item => {
+                        // Create a new div element
                         let div = document.createElement('div')
-                        div.className = 'card';
+                        div.className = 'card' // Set the class of the div to 'card'
+    
+                        // Set the inner HTML of the div to include the item details
                         div.innerHTML = `
                         <img src="${item.photo_path}" alt="${item.brand} ${item.model}">
                         <div class="card-content">
@@ -29,18 +37,22 @@ document.addEventListener("DOMContentLoaded", function () {
                             </button>
                             <button onclick="delete_data(${item.id})"><i class="fas fa-trash"></i></button>
                         </div>`
+    
+                        // Append the new div to the 'data' element
                         dataElement.appendChild(div)
                     })
                 } else {
+                    // If there is no data, display a message indicating no data
                     dataElement.innerHTML = "No data to display."
                 }
             })
-            .catch(error => console.error('Error:', error))
+            .catch(error => console.error('Error:', error)) // Log any errors to the console
     }
 
     // Adding a new record
-    document.getElementById('formularz').addEventListener('submit', function (event) {
+    document.getElementById('car_form').addEventListener('submit', function (event) {
         event.preventDefault()
+        // Get form values
         vin = document.getElementById('vin').value
         brand = document.getElementById('brand').value
         model = document.getElementById('model').value
@@ -54,6 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
         price = document.getElementById('price').value
         phone_number = document.getElementById('phone_number').value
 
+        // Ensure no field is empty
+        //The trim() method in JavaScript is used to remove whitespace from both ends of a string. 
+        //This includes spaces, tabs, and other whitespace characters.
         if (vin.trim() !== '' && brand.trim() !== '' && model.trim() !== '' &&
             year.trim() !== '' && mileage.trim() !== '' && engine.trim() !== '' &&
             owner_count.trim() !== '' && photo_path.trim() !== '' && price.trim() !== '' && phone_number.trim() !== '') {
@@ -71,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(data => {
                     console.log(data.message)
                     display_data()
+                    // Clear form fields after successful submission
                     document.getElementById('vin').value = ''
                     document.getElementById('brand').value = ''
                     document.getElementById('model').value = ''
