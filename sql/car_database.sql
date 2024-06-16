@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `cars`
+-- `cars` table structure
 --
 
 CREATE TABLE `cars` (
@@ -117,7 +117,7 @@ INSERT INTO `cars` (`id`, `vin`, `brand`, `model`, `year`, `mileage`, `engine`, 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `users`
+-- `users` table structure
 --
 
 CREATE TABLE `users` (
@@ -137,18 +137,18 @@ INSERT INTO `users` (`user_id`, `username`, `password_hash`, `email`, `created_a
 (2, 'jane_smith', 'hashed_password_2', 'jane.smith@example.com', '2024-06-05 08:59:36');
 
 --
--- Indeksy dla zrzutów tabel
+-- Indexes for tables
 --
 
 --
--- Indeksy dla tabeli `cars`
+-- Indexes for table `cars`
 --
 ALTER TABLE `cars`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `vin` (`vin`);
 
 --
--- Indeksy dla tabeli `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
